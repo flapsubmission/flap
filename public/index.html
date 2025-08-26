@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="RINA: Rapid Introspective Neural Adaptation solves the problem of adapting quadruped locomotion controllers to O.O.D. payloads by learning a neural operator network representation of the residual dynamics to compensate for payload induced joint torques.">
-  <meta name="keywords" content="RINA, quadruped robot out-of-distribution payload adaptation">
+        content="">
+  <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title></title>
 
@@ -46,8 +46,9 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">RINA: Rapid Introspective Neural Adaptation for Out-of-Distribution Payload Configurations on Quadruped Robots</h1>
-          <div class="is-size-5 publication-authors">
+          <h1 class="title is-1 publication-title">Learning Forward Looking Adaptation to Dynamic Payloads for Quadruped Locomotion via Physics-Informed Neural Networks</h1>
+          
+          <!-- <div class="is-size-5 publication-authors">
             <span class="author-block">
               Oscar Youngquist and</span>
             <span class="author-block">
@@ -65,14 +66,14 @@
                         width="200" />
               </a>
             </span>
-          </div>
+          </div> -->
 
           <div class="column has-text-centered">
             <div class="publication-links">
               
               <!-- PDF Link. -->
               <span class="link-block">
-                <a href="./static/pdf/ICRA25_0821_FI.pdf"
+                <a href="./static/pdf/FLAP_ICRA_2026.pdf"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -83,7 +84,7 @@
 
               <!-- Supp Material Link -->
               <span class="link-block">
-                <a href="./static/pdf/RINA_ICRA25_Supp_Material.pdf"
+                <a href="./static/pdf/FLAP_ICRA_Supp.pdf"
                    class="external-link button is-normal is-rounded is-dark">
                    <span class="icon">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" width="24" height="24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -94,22 +95,9 @@
                 </a>
               </span>
 
-              <!-- Video Link. -->
-              <!-- <span class="link-block"> -->
-                <!-- <a href="https://www.youtube.com/watch?v=zslbOXQXtSI" -->
-                <!-- <a href="./static/videos/presentation.mp4" -->
-                  <!-- class="external-link button is-normal is-rounded is-dark"> -->
-                  <!-- <span class="icon"> -->
-                    <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"> -->
-                      <!-- <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z" /> -->
-                    <!-- </svg> -->
-                  <!-- </span> -->
-                  <!-- <span>Video</span> -->
-                <!-- </a> -->
-              <!-- </span> -->
 
               <!-- Poster Link. -->
-              <span class="link-block">
+              <!-- <span class="link-block">
                 <a href="./static/pdf/RINA_ICRA2025_Poster.pdf"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
@@ -119,7 +107,8 @@
                   </span>
                   <span>Poster</span>
                 </a>
-              </span>
+              </span> -->
+
               <!--/ Poster Link. -->
 
 
@@ -129,7 +118,7 @@
 
           <div class="column has-text-centered">
             <div class="is-size-5 publication-venue">
-                IEEE International Conference on Robotics and Automation (ICRA) 2025
+                IEEE International Conference on Robotics and Automation (ICRA) 2026 <p style="color:red;">(Under Review)</p>
             </div>
           </div>
 
@@ -147,26 +136,14 @@
         <h2 class="title is-2">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Adaptive locomotion is a fundamental capability for quadruped robots,
-            particularly in real-world scenarios when they must transport novel or 
-            out-of-distribution (O.O.D.) payloads across diverse terrains. 
-            Previous learning-based methods often tightly couple a locomotion controller's 
-            learned parameters with the adaptation process, which requires extensive 
-            pre-training or slow online updates when encountering O.O.D. payloads. 
-            To enable adaptation of quadruped locomotion to O.O.D. payloads, we propose 
-            the novel Rapid Introspective Neural Adaptation (RINA) method that rapidly 
-            compensates for differences between expected and actual joint torques caused by 
-            O.O.D. payloads. RINA introduces an adaptive residual dynamics representation 
-            that decouples the learning model's parameters from those used for adaptation. 
-            A new neural operator network is introduced to learn a set of basis functions as the learning model,
-            which are combined using linear coefficients to predict residual dynamics. 
-            Then, these residual dynamics are used to adjust the locomotion controller's output,
-            compensating for additional torques induced by the O.O.D. payload. 
-            During execution, the mixing coefficients can be rapidly and introspectively adapted 
-            on-the-go to generate joint torque compensations for O.O.D. payloads, while keeping the 
-            learned basis functions unchanged. Experimental results have demonstrated that our 
-            RINA approach well addresses on-the-go O.O.D. payload adaptation on varied natural terrains without collecting 
-            and retraining on additional data and outperforms baseline methods.  
+            Payload adaptive locomotion an essential skill for quadruped robots deployed in many real world scenarios, particularly when tasked with transporting a 
+            dynamic payload. Existing methods face fundamental limitations: reactive adaptation strategies respond too slowly to sudden payload shifts, 
+            while learning-based approaches often produce physically inconsistent models of the robot's dynamics that generalize poorly to novel states. To address these 
+            limitations, we propose Forward Looking Adaption to Dynamic Payloads (FLAP), a novel method that proactively compensates for discrepancies between 
+            expected and actual locomotion behavior caused by dynamic payloads. FLAP integrates two key components: (1) a novel physics-informed neural network (PINN) that learns
+            to predict anticipated joint states while enforcing physical consistency through structured dynamics constraints, and (2) a composite adaptive control law that 
+            rapidly generates anticipatory joint torque compensations using the PINN's predictions. Our approach ensures generalizable dynamics modeling while enabling real-time, 
+            forward-looking adaptation to dynamic payload conditions. Experimental results demonstrate that FLAP effectively enables robust locomotion with dynamic payloads in real-world environments.
           </p>
         </div>
       </div>
