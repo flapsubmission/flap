@@ -30,7 +30,8 @@
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/images/favicon.ico">
+  
+  <!-- <link rel="icon" href="./static/images/favicon.ico"> -->
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
@@ -214,18 +215,13 @@
                         alt="Interpolate start reference image."
                         width="55%" />
                 </div>
-                <p>To address the problem of adapting quadruped locomotion controllers to O.O.D. payload configurations, we propose a 
-                  novel Rapid Introspective Neural Adaptation (RINA) method. RINA enables quadruped robots to rapidly compensate for 
-                  differences between actual and expected joint torques induced by payloads unaccounted for by a parameterized locomotion 
-                  controller. We design an adaptive residual dynamics representation that decouples the trained neural network parameters 
-                  from the parameters employed for adaptation. A new neural operator network learns a set of basis functions that are mixed 
-                  using linear coefficients to predict the residual dynamics. The predicted residual dynamics are then used to compensate the 
-                  output of a locomotion controller for the torques induced by a O.O.D. payload. During execution, coefficients can be 
-                  rapidly and introspectively adapted on-the-go in order to generate joint torque compensation values for the novel payloads 
-                  while leaving the learned network parameters fixed. Introspective adaptation refers to the ability for a robot to monitor 
-                  and assess its actual performance compared to its expected performance and update it's control output to minimize observed 
-                  differences. Our approach enables quadruped robots to rapidly adapt to O.O.D. payload configurations without extensive
-                   pretraining or needing to fine tune the existing model with a new dataset on-the-go.</p>
+                <p>
+                  We present the <em><b>F</b>orward <b>L</b>ooking <b>A</b>daptation to Dynamic <b>P</b>ayloads</em> (FLAP) method for real-time adaptation of quadruped locomotion controllers to dynamic payloads. 
+                  FLAP enables proactive compensation for anticipated locomotion discrepancies caused by shifting payload mass distributions through a physics-informed neural network (PINN) that models the system's forward dynamics. 
+                  The PINN jointly predicts the evolution of the robot's whole body state and the payload induced forces/torques acting on the robot, while a physics-informed loss function ensures the predictions respect the known dynamics of the robot. 
+                  This constrained learning approach results in physically plausible forward dynamics model that generalizes well to novel states. 
+                  During deployment, these learned dynamics are integrated into a composite adaptive control law that rapidly generates anticipatory joint torque compensations in real time. 
+                  By combining physics informed learning with adaptive control, FLAP achieves robust locomotion with adaption to dynamic payloads.</p>
               </div>
             </div>
           </div>
@@ -241,7 +237,7 @@
     <!-- Demo Videos Real -->
     <div class="columns is-centered">
       <div class="content">
-        <h2 class="title is-3 has-text-centered">Evaluation on Novel Outdoor Terrains</h2>
+        <h2 class="title is-2 has-text-centered">Outdoor Real-World Terrains Demonstration</h2>
         <p>We evaluated RINA's performance on unseen terrains by comparing it to the baselines on three outdoor terrains: grass, dirt, and gravel. 
           A 5 pound (lbs) and 7.5 lbs payload are mounted 1.5 inches and 3 inches to the (<b>L</b>)eft and (<b>F</b>)ront of the robot's center-of-mass. 
           The robot moved straight across the terrains without backward and lateral movements, or rotations. 
@@ -251,88 +247,52 @@
     </div>
 
     <div class="columns is-centered">
-      <div class="column">
-        <h3 class="title is-3 has-text-centered">Dirt</h3>
-      </div>
-      <div class="column">
-        <h3 class="title is-3 has-text-centered">Gravel</h3>
-      </div>
-      <div class="column">
-        <h3 class="title is-3 has-text-centered">Grass</h3>
+      <div class="content">
+        <h2 class="title is-3 has-text-centered">6 kg Liquid Water Payload</h2>
       </div>
     </div>
 
     <div class="columns is-centered">
       <div class="content">
-        <h2 class="title is-3 has-text-centered">7.5 lbs F</h2>
+        <h2 class="title is-4 has-text-centered">FLAP</h2>
       </div>
     </div>
 
     <div class="columns is-centered">
       <!-- Dirt Terrain -->
-      <div class="column">
         <div class="content">
           <!-- <h3 class="title is-4 has-text-centered">7.5 lbs F</h3> -->
           <video  controls autoplay muted loop playsinline height="100%">
-            <source src="./static/videos/Dirt/website_icra_outdoor_dirt_wbic_75lbs_f_cropped.mp4"
+            <source src="./static/videos/moving_flap_tank1_01.mp4"
                     type="video/mp4">
           </video>
         </div>
+    </div>
+
+
+    <div class="columns is-centered">
+      <div class="content">
+        <h2 class="title is-4 has-text-centered">WBIC</h2>
+      </div>
+    </div>
+
+    <div class="columns is-centered">  
+      <!-- Dirt Terrain -->
+      <div class="column">
         <div class="content">
-          <video  controls autoplay muted loop playsinline height="100%">
-            <source src="./static/videos/Dirt/website_icra_outdoor_dirt_mlp_75lbs_f_cropped.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="content">
-          <video  controls autoplay muted loop playsinline height="100%">
-            <source src="./static/videos/Dirt/website_icra_outdoor_dirt_rina_75lbs_f_cropped.mp4"
+          <!-- <h3 class="title is-4 has-text-centered">7.5 lbs F</h3> -->
+          <video  controls muted playsinline height="100%">
+            <source src="./static/videos/moving_wbic_tank1_01_failure_whole.mp4"
                     type="video/mp4">
           </video>
         </div>
       </div>
-
-      <!-- Gravel Terrain -->
+      <!-- Dirt Terrain -->
       <div class="column">
         <div class="content">
           <!-- <h3 class="title is-4 has-text-centered">7.5 lbs F</h3> -->
-          <video  controls autoplay muted loop playsinline height="100%">
-            <source src="./static/videos/Gravel/website_icra_terrain_gravel_wbic_75lbs_f_failure_cropped.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="content">
-          <video  controls autoplay muted loop playsinline height="100%">
-            <source src="./static/videos/Gravel/website_icra_terrain_gravel_mlp_75lbs_f_cropped.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="content">
-          <video  controls autoplay muted loop playsinline height="100%">
-            <source src="./static/videos/Gravel/website_icra_terrain_gravel_rina_75lbs_f_cropped.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-      </div>
-
-      <!-- Grass Terrain -->
-      <div class="column">
-        <div class="content">
-          <!-- <h3 class="title is-4 has-text-centered">7.5 lbs F</h3> -->
-          <video  controls autoplay muted loop playsinline height="100%">
-            <source src="./static/videos/Grass/website_icra_outdoor_grass_wbic_75lbs_f_cropped.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="content">
-          <video  controls autoplay muted loop playsinline height="100%">
-            <source src="./static/videos/Grass/website_icra_outdoor_grass_mlp_75lbs_f_cropped.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="content">
-          <video  controls autoplay muted loop playsinline height="100%">
-            <source src="./static/videos/Grass/website_icra_outdoor_grass_rina_75lbs_f_cropped.mp4"
+          <video  controls muted playsinline height="100%">
+            <source src="./static/videos/moving_wbic_tank1_02_failure_whole.mp4"
                     type="video/mp4">
           </video>
         </div>
@@ -342,80 +302,6 @@
     <div class="columns is-centered">
       <div class="content">
         <h2 class="title is-3 has-text-centered">7.5 lbs L</h2>
-      </div>
-    </div>
-
-    <div class="columns is-centered">
-      <!-- Dirt Terrain -->
-      <div class="column">
-        <!-- <h3 class="title is-3 has-text-centered">Dirt</h3> -->
-        <div class="content">
-          <!-- <h3 class="title is-4 has-text-centered">7.5 lbs L</h3> -->
-          <video  controls autoplay muted loop playsinline height="100%">
-            <source src="./static/videos/Dirt/website_icra_outdoor_dirt_wbic_75lbs_l_cropped.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="content">
-          <video  controls autoplay muted loop playsinline height="100%">
-            <source src="./static/videos/Dirt/website_icra_outdoor_dirt_mlp_75lbs_l_cropped.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="content">
-          <video  controls autoplay muted loop playsinline height="100%">
-            <source src="./static/videos/Dirt/website_icra_outdoor_dirt_rina_75lbs_l_cropped.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-      </div>
-
-      <!-- Gravel Terrain -->
-      <div class="column">
-        <!-- <h3 class="title is-3 has-text-centered">Gravel</h3> -->
-        <div class="content">
-          <!-- <h3 class="title is-4 has-text-centered">7.5 lbs L</h3> -->
-          <video  controls autoplay muted loop playsinline height="100%">
-            <source src="./static/videos/Gravel/website_icra_terrain_gravel_wbic_75lbs_l_failure_cropped.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="content">
-          <video  controls autoplay muted loop playsinline height="100%">
-            <source src="./static/videos/Gravel/website_icra_terrain_gravel_mlp_75lbs_l_cropped.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="content">
-          <video  controls autoplay muted loop playsinline height="100%">
-            <source src="./static/videos/Gravel/website_icra_terrain_gravel_rina_75lbs_l_cropped.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-      </div>
-
-      <!-- Grass Terrain -->
-      <div class="column">
-        <!-- <h3 class="title is-3 has-text-centered">Grass</h3> -->
-        <div class="content">
-          <!-- <h3 class="title is-4 has-text-centered">7.5 lbs L</h3> -->
-          <video  controls autoplay muted loop playsinline height="100%">
-            <source src="./static/videos/Grass/website_icra_outdoor_grass_wbic_75lbs_l_cropped.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="content">
-          <video  controls autoplay muted loop playsinline height="100%">
-            <source src="./static/videos/Grass/website_icra_outdoor_grass_mlp_75lbs_l_cropped.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="content">
-          <video  controls autoplay muted loop playsinline height="100%">
-            <source src="./static/videos/Grass/website_icra_outdoor_grass_rina_75lbs_l_cropped.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
       </div>
     </div>
   </div>
@@ -459,7 +345,7 @@
 
 
 
-<section class="section" id="BibTeX">
+<!-- <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
     <pre><code>@article{youngquist2024rina,
@@ -468,7 +354,7 @@
       year      = {2024}
     }</code></pre>
   </div>
-</section>
+</section> -->
 
 
 <footer class="footer">
@@ -476,9 +362,9 @@
     <div class="columns is-centered">
       <div class="column is-8">
         <div class="content">
-          <p>
+          <!-- <p>
             This work was partially supported by NSF CAREER Award IIS-2308492 and DARPA Young Faculty Award (YFA) D21AP10114-00.
-          </p>
+          </p> -->
           <p>
             This website is adapted from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>, licensed
             under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
