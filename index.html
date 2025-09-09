@@ -137,14 +137,14 @@
         <h2 class="title is-2">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Payload adaptive locomotion an essential skill for quadruped robots deployed in many real world scenarios, particularly when tasked with transporting a 
-            dynamic payload. Existing methods face fundamental limitations: reactive adaptation strategies respond too slowly to sudden payload shifts, 
-            while learning-based approaches often produce physically inconsistent models of the robot's dynamics that generalize poorly to novel states. To address these 
-            limitations, we propose Forward Looking Adaption to Dynamic Payloads (FLAP), a novel method that proactively compensates for discrepancies between 
-            expected and actual locomotion behavior caused by dynamic payloads. FLAP integrates two key components: (1) a novel physics-informed neural network (PINN) that learns
-            to predict anticipated joint states while enforcing physical consistency through structured dynamics constraints, and (2) a composite adaptive control law that 
-            rapidly generates anticipatory joint torque compensations using the PINN's predictions. Our approach ensures generalizable dynamics modeling while enabling real-time, 
-            forward-looking adaptation to dynamic payload conditions. Experimental results demonstrate that FLAP effectively enables robust locomotion with dynamic payloads in real-world environments.
+            Payload-adaptive locomotion is an essential capability for quadruped robots operating in real-world scenarios, particularly when tasked with transporting dynamic payloads. 
+            Existing approaches face fundamental limitations: reactive adaptation strategies respond too slowly to sudden payload changes, while learning-based methods often yield physically 
+            inconsistent models of robot dynamics that generalize poorly to novel states. To address these key challenges, we introduce Forward-Looking Adaptation to Dynamic Payloads (FLAP), 
+            a novel approach that proactively compensates for discrepancies between expected and actual locomotion behavior induced by dynamic payloads. FLAP combines two critical components: 
+            (1) a physics-informed neural network (PINN) that predicts anticipated joint states while enforcing physical consistency through structured dynamics constraints, and (2) a 
+            composite adaptive control law that rapidly generates anticipatory joint torque compensations based on the PINN's predictions. Through unifying structured dynamics modeling with 
+            real-time anticipatory control, our method enables generalizable and physically consistent adaptation to dynamic payloads. Experimental results demonstrate that FLAP achieves robust 
+            locomotion under diverse payload conditions on physical quadruped robots in real-world environments.
           </p>
         </div>
       </div>
@@ -176,17 +176,16 @@
             <div class="column">
               <h4 class="title is-2 has-text-centered">Motivation</h4>
               <div class="has-text-centered">
-                <img src="./static/images/rina_motivation_cropped_bigger.png"
+                <img src="./static/images/FLAC_figure_one_V03.png"
                       class="interpolation-image"
                       alt="Interpolate start reference image."
                       width="60%" />
               </div>
-                <p> Quadruped robots have seen a dramatic growth in capabilities. This rapid development has been motivated by the performance potential of legged 
-                  systems in unstructured environments. Prominent applications include autonomous inspection, disaster response, and search and rescue. 
-                  In these scenarios, legged robots may be tasked with navigating various terrains while transporting payloads previously unseen during 
-                  design or training, such as in the disaster response scenario in the figure above. Due to the additional torques induced on the quadruped's 
-                  torso, the robot must rapidly adapt its locomotion controller in real time to satisfy the needs of the out-of-distribution (O.O.D.) 
-                  payload configurations and terrain variations. 
+                <p>
+                  Quadruped robots have demonstrated remarkable advances in mobility driven by their potential to operate in unstructured environments. These capabilities have enabled their use in applications 
+                  such as autonomous inspection, disaster response, and search-and-rescue. In such applications, legged robots may be tasked with transporting dynamic payloads, including shifting rubble, 
+                  loosely packed containers, or liquids. These dynamic payloads induce time-varying mass distributions that generate additional forces and torques acting on the robot's body. To maintain 
+                  stable locomotion, the quadruped robot must rapidly adapt to these disturbances by compensating for the resulting deviations in real time.
                   </p>
               </div>
 
@@ -208,20 +207,21 @@
             <!-- Approach. -->
             <div class="column">
               <div class="content">
-                <h3 class="title is-2 has-text-centered">RINA Approach</h3>
+                <h3 class="title is-2 has-text-centered">FLAP Approach</h3>
                 <div class="has-text-centered">
-                  <img src="./static/images/rina_online_adaptation_final_corrected.png"
+                  <img src="./static/images/FLAC_figure_two_PINN_V02.png"
                         class="interpolation-image"
                         alt="Interpolate start reference image."
                         width="55%" />
                 </div>
                 <p>
                   We present the <em><b>F</b>orward <b>L</b>ooking <b>A</b>daptation to Dynamic <b>P</b>ayloads</em> (FLAP) method for real-time adaptation of quadruped locomotion controllers to dynamic payloads. 
-                  FLAP enables proactive compensation for anticipated locomotion discrepancies caused by shifting payload mass distributions through a physics-informed neural network (PINN) that models the system's forward dynamics. 
-                  The PINN jointly predicts the evolution of the robot's whole body state and the payload induced forces/torques acting on the robot, while a physics-informed loss function ensures the predictions respect the known dynamics of the robot. 
-                  This constrained learning approach results in physically plausible forward dynamics model that generalizes well to novel states. 
-                  During deployment, these learned dynamics are integrated into a composite adaptive control law that rapidly generates anticipatory joint torque compensations in real time. 
-                  By combining physics informed learning with adaptive control, FLAP achieves robust locomotion with adaption to dynamic payloads.</p>
+                  FLAP enables proactive compensation for anticipated locomotion discrepancies caused by shifting payload mass distributions through a physics-informed neural network (PINN) that is designed to 
+                  model the robotic system's forward dynamics. The PINN simultaneously predicts the evolution of the robot's whole body state and the payload-induced forces and torques acting on the robot, while 
+                  a physics-informed loss function ensures the predictions respect the dynamics of the quadruped. Through PINN, FLAP is able to learn a physically plausible forward dynamics model that generalizes 
+                  well to novel states. The learned dynamics are then integrated into a composite adaptive control law that enables rapid, anticipatory joint-torque compensation in real time during real-world execution.
+                  Through integrating physics-informed learning with adaptive control, FLAP enables robust quadruped locomotion with effective adaptation to dynamic payloads, such as liquids.
+                </p>
               </div>
             </div>
           </div>
@@ -238,17 +238,16 @@
     <div class="columns is-centered">
       <div class="content">
         <h2 class="title is-2 has-text-centered">Outdoor Real-World Terrains Demonstration</h2>
-        <p>We evaluated RINA's performance on unseen terrains by comparing it to the baselines on three outdoor terrains: grass, dirt, and gravel. 
-          A 5 pound (lbs) and 7.5 lbs payload are mounted 1.5 inches and 3 inches to the (<b>L</b>)eft and (<b>F</b>)ront of the robot's center-of-mass. 
-          The robot moved straight across the terrains without backward and lateral movements, or rotations. 
-          A human operator collected evaluation data, averaging 8,777 time steps (17.5 seconds) per experiment. We show the results of the 7.5 lbs payload 
-          experiments below</p>
+        <p>We validated FLAP's robustness to real-world conditions through deployment on a physical robot carrying a 5 liter liquid payload across a varied outdoor course 
+          featuring five distinct terrains not encountered during training. The training data for FLAP consisted of 2.88 million time-steps from MuJoCo simulation on flat, 
+          unobstructed terrain. Transporting a liquid payload in the real-world requires not only counteracting the impact of the dynamic payload but also the ground reaction 
+          force variations introduced from unfamiliar terrains. </p>
       </div>
     </div>
 
     <div class="columns is-centered">
       <div class="content">
-        <h2 class="title is-3 has-text-centered">6 kg Liquid Water Payload</h2>
+        <h2 class="title is-3 has-text-centered">5 Liter Liquid Water Payload</h2>
       </div>
     </div>
 
@@ -259,9 +258,7 @@
     </div>
 
     <div class="columns is-centered">
-      <!-- Dirt Terrain -->
         <div class="content">
-          <!-- <h3 class="title is-4 has-text-centered">7.5 lbs F</h3> -->
           <video  controls autoplay muted loop playsinline height="100%">
             <source src="./static/videos/moving_flap_tank1_01.mp4"
                     type="video/mp4">
@@ -277,20 +274,16 @@
     </div>
 
     <div class="columns is-centered">  
-      <!-- Dirt Terrain -->
       <div class="column">
         <div class="content">
-          <!-- <h3 class="title is-4 has-text-centered">7.5 lbs F</h3> -->
           <video  controls muted playsinline height="100%">
             <source src="./static/videos/moving_wbic_tank1_01_failure_whole.mp4"
                     type="video/mp4">
           </video>
         </div>
       </div>
-      <!-- Dirt Terrain -->
       <div class="column">
         <div class="content">
-          <!-- <h3 class="title is-4 has-text-centered">7.5 lbs F</h3> -->
           <video  controls muted playsinline height="100%">
             <source src="./static/videos/moving_wbic_tank1_02_failure_whole.mp4"
                     type="video/mp4">
@@ -298,15 +291,65 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
 
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="content">
-        <h2 class="title is-3 has-text-centered">7.5 lbs L</h2>
+        <h2 class="title is-3 has-text-centered">4.5 Liter Water Liquid Payload</h2>
+        <p>We further evluated FLAP's ability to transport dynamic payloads by transporting an additional 4.5 liter liquid payload in a separate tank.
+          This tank is shorter and wider/longer than the previous, resulting in distinct time-varying mass distributions. We found FLAP was once again 
+          able to successfully transport this payload across our outdoor course. We did not evlaute using the WBIC baseline to avoid crashing and damaging the robot.</p>
       </div>
+    </div>
+    <div class="columns is-centered">
+        <div class="content">
+          <video  controls muted playsinline height="100%">
+            <source src="./static/videos/moving_flap_tank2_01.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
     </div>
   </div>
 </section>
 
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="content">
+        <h2 class="title is-3 has-text-centered">No Payload Comparsion</h2>
+        <p>We additionally validated that FLAP's anticipatory joint torque compensations do not deteriorate the ability locomote without an added payload on outdoor terrains. 
+          We found that not only does FLAP not deteriorate performance, but actually improves the height and orientation tracking performance in comparison to the WBIC baseline.
+        </p>
+      </div>
+    </div>
+  
+    <div class="columns is-centered">  
+      <div class="column">
+        <div class="content">
+          <video  controls muted playsinline height="100%">
+            <source src="./static/videos/moving_flap_none.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <div class="column">
+        <div class="content">
+          <video  controls muted playsinline height="100%">
+            <source src="./static/videos/moving_wbic_none.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- <section class="hero is-light is-small"> -->
   <!-- <div class="hero-body"> -->
